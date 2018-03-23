@@ -1,37 +1,106 @@
-## Welcome to GitHub Pages
+# Daily-Motivation Project
 
-You can use the [editor on GitHub](https://github.com/codersaurabh/Daily-Motivation/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+### Random Daily Motivational Qutoes With Share Option
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+* Stay positive and happy. Work hard and don't give up hope. Be open to criticism and keep learning. Surround yourself with happy, warm and genuine people.
 
-### Markdown
+### What's in it?
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+* Simple src/index.jsx and src/index.css (local module css).
+* Webpack configuration for development (with hot reloading) and production (with minification).
+* CSS module loading, so you can include your css by ```import styles from './path/to.css';```.
+* Both js(x) and css hot loaded during development.
+* [Webpack Dashboard Plugin](https://github.com/FormidableLabs/webpack-dashboard) on dev server.
 
-```markdown
-Syntax highlighted code block
+### To run
 
-# Header 1
-## Header 2
-### Header 3
+* You'll need to have [git](https://git-scm.com/) and [node](https://nodejs.org/en/) installed in your system.
+* Fork and clone the project:
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```
+https://github.com/codersaurabh/Daily-Motivation.git
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+* Then install the dependencies:
 
-### Jekyll Themes
+```
+npm install
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/codersaurabh/Daily-Motivation/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+* Run development server:
 
-### Support or Contact
+```
+npm start
+```
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+* Or you can run development server with [webpack-dashboard](https://github.com/FormidableLabs/webpack-dashboard):
+
+```
+npm run dev
+```
+
+Open the web browser to `http://localhost:8888/`
+
+### To test
+To run unit tests:
+
+```
+npm test
+```
+
+Tests come bundled with:
+
+* Jest
+* Enzyme
+* React Test Utils
+* React Test Renderer
+
+### To build the production package
+
+```
+npm run build
+```
+
+### Nginx Config
+
+Here is an example Nginx config:
+
+```
+server {
+	# ... root and other options
+
+	gzip on;
+	gzip_http_version 1.1;
+	gzip_types text/plain text/css text/xml application/javascript image/svg+xml;
+
+	location / {
+		try_files $uri $uri/ /index.html;
+	}
+
+	location ~ \.html?$ {
+		expires 1d;
+	}
+
+	location ~ \.(svg|ttf|js|css|svgz|eot|otf|woff|jpg|jpeg|gif|png|ico)$ {
+		access_log off;
+		log_not_found off;
+		expires max;
+	}
+}
+```
+
+### Eslint
+There is a `.eslint.yaml` config for eslint ready with React plugin.
+
+To run linting, run:
+
+```
+npm run lint
+```
+
+### Notes on importing css styles
+* styles having /src/ in their absolute path considered part of the application and exported as local css modules.
+* other styles considered global styles used by components and included in the css bundle directly.
+
+### Contribute
+Please contribute to the project if you know how to make it better, including this README :)
